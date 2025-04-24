@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: Bedrock Alert Team Information API
+  description: Retrieves team information about a specific alert by alert number.
+  version: 1.0.0
+
+paths:
+  "/alert_id":
+    get:
+      summary: Get alert details
+      description: Retrieve Team information about an alert using its alert number.
+      operationId: getAlertTeamInfo
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unique identifier for the alert
+      responses:
+        '200':
+          description: Successful Team Info Retrieval
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert_id:
+                    type: integer
+                    example: "ALRT-123456"
+                  repo:
+                    type: string
+                    example: "mr-burns"
+                  team:
+                    type: string
+                    example: "Team X"
+                  teamlead:
+                    type: string
+                    example: "Edna Krabapple"
+
+        '404':
+          description: Alert not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Alert not found"
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    Alert:
+      type: object
+      properties:
+        alert_id:
+          type: integer
+        alert_title:
+          type: string
+        severity:
+          type: string
+        status:
+          type: string
+        repo:
+          type: string
