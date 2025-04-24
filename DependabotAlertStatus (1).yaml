@@ -30,7 +30,7 @@ paths:
                     example: "ALRT-123456"
                   alert_title:
                     type: string
-                    example: "Disk space critical on server xyz123"
+                    example: "Pillow vuln xyz123"
                   severity:
                     type: string
                     enum: [Low, Medium, High, Critical]
