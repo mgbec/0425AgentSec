@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Bedrock Agent Alert Information API
+  description: Retrieves detailed information about a specific alert by alert number.
+  version: 1.0.0
+
+paths:
+  "/number":
+    get:
+      summary: Get alert details
+      description: Retrieve detailed information about an alert using its alert number.
+      operationId: getAlertInfo
+      parameters:
+        - name: number
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier for the alert
+      responses:
+        '200':
+          description: Successful alert information retrieval
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  number:
+                    type: string
+                    example: "7"
+                  created_at:
+                    type: string
+                    example: "2025-01-17 01:37:28+00:00"
+                  dependency:
+                    type: string
+                    example: "{'package': {'ecosystem': 'npm', 'name': 'nanoid'}, 'manifest_path': 'package-lock.json', 'scope': 'development', 'relationship': 'unknown'}"
+                  state:
+                    type: string
+                    example: "open"
+                  repo:
+                    type: string
+                    example: "puppetOps"
+                  security_advisory:
+                    type: string
+                    example: "{'ghsa_id': 'GHSA-mwcw-c2x4-8c55', 'cve_id': 'CVE-2024-55565'}"
+                  security_vulnerability:
+                    type: string
+                    example: "{'package': {'ecosystem': 'npm', 'name': 'nanoid'}, 'severity': 'medium', 'vulnerable_version_range': '< 3.3.8', 'first_patched_version': {'identifier': '3.3.8'}}"
+                  url:
+                    type: string
+                    example: "https://api.github.com/repos/mgbec/amplify-vite-react-template/dependabot/alerts/1"
+
+
+        '404':
+          description: Alert not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Alert not found"
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    Alert:
+      type: object
+      properties:
+        number:
+          type: string
+        created_at:
+          type: string
+        dependency:
+          type: string
+        state:
+          type: string
+        repo:
+          type: string
+        security_advisory:
+          type: string
+        security_vulnerability:
+          type: string
+        url:
+          type: string
