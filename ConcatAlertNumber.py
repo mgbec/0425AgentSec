@@ -8,7 +8,7 @@ def lambda_handler(event, context):
     alertid=event['parameters'][0]['value']
     response = client.get_item(
         TableName='concat_dependabotalert',
-        Key={'number':{'N': alertid}})
+        Key={'number':{'S': alertid}})
     print(response)
     response_body = {
         'application/json': {
@@ -35,4 +35,3 @@ def lambda_handler(event, context):
     }
        
     return api_response    
-
